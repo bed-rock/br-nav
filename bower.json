@@ -1,0 +1,27 @@
+{
+  "name": "br-nav",
+  "version": "0.0.1",
+  "authors": [
+    "cbfranca <cleidsonbf@gmail.com>"
+  ],
+  "description": "Vertical navigation built with polymer",
+  "main": "br-nav.html",
+  "keywords": [
+    "webcomponents",
+    "polymer",
+    "bedrock",
+    "nav",
+    "navigation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+   "dependencies": {
+    "bedrock-base": "*"
+  }
+}
