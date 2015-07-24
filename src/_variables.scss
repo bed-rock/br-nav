@@ -1,0 +1,14 @@
+$nav_width: 300px;
+$nav_margin_top: $header_height;
+$nav_minify_width: 48px;
+$nav_bg_color: $color-white-5;
+
+$menu_link_font_size: 1rem;
+$menu_item_background: darken( $page_nav_bg_color, 5% );
+$menu_item_hover_background: darken( $page_nav_bg_color, 10% );
+
+$menu_link_color: $color-gray;
+$menu_link_height: 48px;
+
+$menu_subitens_on_minify_menu: 150px;
+$menu_subitem_link_padding: 16px;
