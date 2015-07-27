@@ -1,14 +1,17 @@
-$nav_width: 300px;
-$nav_margin_top: $header_height;
-$nav_minify_width: 48px;
-$nav_bg_color: $color-white-5;
+$nav-width: 300px;
+$nav-margin-top: $header-height;
+$nav-minify-width: 48px;
+$nav-bg-color: $color-white-5;
+$nav-transition: all .2s ease-out;
 
-$menu_link_font_size: 1rem;
-$menu_item_background: darken( $page_nav_bg_color, 5% );
-$menu_item_hover_background: darken( $page_nav_bg_color, 10% );
+$menu-link-font-size: 1rem;
+$menu-item-hover-background: darken( $nav-bg-color, 5% );
+$menu-subitem-hover-background: darken( $nav-bg-color, 10% );
+$menu-item-hover-color: #000;
 
-$menu_link_color: $color-gray;
-$menu_link_height: 48px;
+$menu-link-color: $color-gray;
+$menu-icon-width: $nav-minify-width;
+$menu-item-height: 48px;
 
-$menu_subitens_on_minify_menu: 150px;
-$menu_subitem_link_padding: 16px;
+$menu-subitens-on-minify-menu: 150px;
+$menu-subitem-link-padding: 16px;

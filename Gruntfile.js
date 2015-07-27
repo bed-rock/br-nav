@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         }
       },
       css: {
-        files: ['scss/**/*.scss'],
+        files: ['src/**/*.scss'],
         tasks: ['default'],
         options: {
           interrupt: true,

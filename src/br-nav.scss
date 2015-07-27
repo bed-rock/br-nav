@@ -3,22 +3,26 @@
 
 .page-nav {
   position: fixed;
-  left: -$nav_width;
-  top: $nav_margin_top;
+  left: $nav-width * -1;
+  top: $nav-margin-top;
   bottom: 0px;
-  width: $nav_width;
-  //height: 100%;
-  background: $nav_bg_color;
+  width: $nav-width;
+  background: $nav-bg-color;
   transition: $transition;
+  user-select: none;
+
+  @media (min-width: $screen-desktop) {
+    left: 0;
+  }
 }
 
 .page-nav__closed {
-  left: - $nav_width !important;
+  left: - $nav-width !important;
 }
 
 .page-nav__opened {
   left: 0px !important;
-  box-shadow: rgba(0, 0, 0, 0.4) -30px 0 30px 30px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 0 30px 0;
 }
 
 
@@ -35,89 +39,102 @@
 
 .menu--item {
   position: relative;
-  min-height: $menu_link_height;
-  line-height: $menu_link_height;
+  min-height: $menu-item-height;
+  line-height: $menu-item-height;
 }
 
-.menu--item__has_sub_menu .menu--link:after {
+.menu--item__has_submenu .menu--link:after {
+  content: '';
   position: absolute;
-  top: 0;
-  right: 15px;
-  height: $menu_link_height;
-  line-height: $menu_link_height;
-  font-family: "FontAwesome";
-  content: "\f0d7";
+  top: $menu-item-height / 2;
+  right: 16px;
+  margin-top: -2.5px;
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
 }
 
-.menu--subitens__opened {
-  background: $menu_item_background;
+.submenu__opened {
+  background: $menu-item-hover-background;
 
   .menu--link {
     color: #000;
   }
 
-  .sub_menu {
+  .submenu {
     display: block;
   }
 
 }
 
 .menu--link {
-  display: block;
-  overflow: hidden;
-  font-size: $menu_link_font_size;
-  text-decoration: none;
-  color: $menu_link_color;
+  display: flex;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  font-size: $menu-link-font-size;
   font-weight: 400;
-  white-space: nowrap;
+  color: $menu-link-color;
+  background: none;
+  text-decoration: none;
   cursor: pointer;
+  transition: $nav-transition;
 
   &:hover,
-  &:hover .menu--label {
-    color: #000;
-    background: $menu_item_hover_background;
+  &:focus {
+    color: $menu-item-hover-color;
+    background: $menu-item-hover-background;
+    outline: none;
   }
 
 }
 
 .menu--icon {
-  display: block;
-  float: left;
-  width: 50px;
-  height: $menu_link_height;
-  line-height: $menu_link_height;
-  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: $menu-icon-width;
+  height: $menu-item-height;
+
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+  }
 }
 
-.menu--label {
+.menu--text {
   display: block;
-  height: $menu_link_height;
-  line-height: $menu_link_height;
+  line-height: $menu-item-height;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
 // Menu sub level
-.sub_menu {
+.submenu {
   display: none;
   overflow: hidden;
   padding-left: 0;
   list-style: none;
 }
-.sub_menu--link {
+.submenu--link {
   display: block;
-  padding-left: $nav_minify_width;
-  padding-right: $menu_subitem_link_padding;
-  font-size: $menu_link_font_size;
-  color: $menu_link_color;
+  padding-left: $nav-minify-width;
+  padding-right: $menu-subitem-link-padding;
+  font-size: $menu-link-font-size;
+  color: $menu-link-color;
   text-decoration: none;
 
   &:hover {
     color: #000;
-    background: $menu_item_hover_background;
+    background: $menu-subitem-hover-background;
   }
 
 }
-.sub_menu--link__active {
+.submenu--link__active {
   color: #000;
   font-weight: 500;
 }
@@ -128,8 +145,8 @@
 .collapse_menu {
   display: none;
 
-  .collapse_menu--icon {
-    transition: $transition;
+  .menu--icon {
+    // transition: $nav-transition;
   }
 
 }
@@ -138,54 +155,45 @@
 // Medium devices (desktops)
 @media (min-width: $screen-desktop) {
 
-  .page-nav {
-    left: 0;
-  }
-
-  .toggle_menu {
-    display: none;
-  }
-
-
   // Minify menu
   .page-nav__minify {
-    width: $nav_minify_width;
+    width: $nav-minify-width;
 
     .menu {
       overflow: visible;
     }
 
-    .menu--label {
+    .menu--text {
       display: none;
       position: absolute;
       top: 0;
-      left: $nav_minify_width;
-      width: $menu_subitens_on_minify_menu;
-      padding-left: $menu_subitem_link_padding;
-      padding-right: $menu_subitem_link_padding;
-      background: $menu_item_background;
-      font-weight: 500;
+      left: $nav-minify-width;
+      width: $menu-subitens-on-minify-menu;
+      padding-left: $menu-subitem-link-padding;
+      padding-right: $menu-subitem-link-padding;
+      background: $menu-item-hover-background;
+      font-weight: $font-bold;
     }
 
-    .menu--item__has_sub_menu .menu--link:after {
-      content: "";
+    .menu--item__has_submenu .menu--link:after {
+      display: none;
     }
 
 
     // Menu sub level
-    .menu--subitens__opened .menu--label,
-    .menu--subitens__opened .sub_menu {
+    .submenu__opened .menu--text,
+    .submenu__opened .submenu {
       display: block;
     }
-    .sub_menu {
+    .submenu {
       position: absolute;
-      top: $menu_link_height;
-      left: $nav_minify_width;
-      width: $menu_subitens_on_minify_menu;
-      background: $menu_item_background;
+      top: $menu-item-height;
+      left: $nav-minify-width;
+      width: $menu-subitens-on-minify-menu;
+      background: $menu-item-hover-background;
     }
-    .sub_menu--link {
-      padding-left: $menu_subitem_link_padding;
+    .submenu--link {
+      padding-left: $menu-subitem-link-padding;
     }
     // End - Menu sub level
 
@@ -193,52 +201,15 @@
     .collapse_menu--icon {
       -webkit-transform: rotate(180deg);
     }
-
   }
   // End - Minify menu
 
 
   .collapse_menu {
+    display: flex;
     position: absolute;
-    bottom: 0px;
-    display: block;
-    width: 100%;
-    height: $menu_link_height;
-    line-height: $menu_link_height;
-    padding: 0;
-    border: 0;
-    border-top: 1px solid #e6e6e6;
-    background: $nav_bg_color;
-    color: #666;
-    font-size: $menu_link_font_size;
-    text-align: left;
-    cursor: pointer;
-
-    &:hover {
-      color: #000;
-      background: $color-white-10;
-    }
-
-    .collapse_menu--icon {
-      display: block;
-      float: left;
-      width: 50px;
-      height: $menu_link_height;
-      line-height: $menu_link_height;
-      font-size: 20px;
-
-      &:before {
-        content: "\f053";
-      }
-
-    }
-
-    .collapse_menu--label {
-      display: block;
-      height: $menu_link_height;
-      line-height: $menu_link_height;
-    }
-
+    bottom: 0;
+    border-top: 1px solid $menu-subitem-hover-background;
   }
 
 
