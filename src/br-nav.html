@@ -3,12 +3,24 @@
 <dom-module id="br-nav">
 
 <link rel="import" type="css" href="../dist/css/br-nav.css">
+<script src="br-nav.js"></script>
 
 <template>
 
   <nav class="page-nav">
 
     <ul id="js-menu" class="menu">
+
+      <li class="menu--item">
+        <button class="menu--link" title="Voltar" onclick="_toggleMenu()">
+          <div class="menu--icon">
+            <svg>
+              <use xlink:href="../../br-icons/svgdefs.svg#icon-user"></use>
+            </svg>
+          </div>
+          <span class="menu--text">Voltar</span>
+        </button>
+      </li>
 
       <li class="menu--item  menu--item__has_submenu">
         <a class="menu--link" title="Item 1">
@@ -90,15 +102,6 @@
       </li>
 
     </ul>
-
-    <button id="collapse_menu" class="menu--link collapse_menu">
-      <div class="menu--icon collapse_menu--icon">
-        <svg>
-          <use xlink:href="../../br-icons/svgdefs.svg#icon-user"></use>
-        </svg>
-      </div>
-      <span class="menu--text">Recolher menu</span>
-    </button>
 
   </nav>
 
