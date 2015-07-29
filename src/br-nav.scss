@@ -9,15 +9,16 @@
   height: 100%;
   z-index: -1;
   opacity: 0;
-  transition: $transition;
-}
-:host.page-nav__opened {
-  z-index: 1;
-  opacity: 1;
-  background: rgba(#000, 0.5);
+  transition: $nav-transition;
 
-  .page-nav {
-    width: $nav-width;
+  &.page-nav__opened {
+    z-index: 1;
+    opacity: 1;
+    background: rgba(#000, 0.5);
+
+    .page-nav {
+      width: $nav-width;
+    }
   }
 }
 
@@ -29,7 +30,7 @@
   overflow: hidden;
   background: $nav-bg-color;
   user-select: none;
-  transition: $transition;
+  transition: $nav-transition;
 }
 
 .menu {
@@ -45,29 +46,31 @@
   position: relative;
   min-height: $menu-item-height;
   line-height: $menu-item-height;
-}
 
-// Caret icon
-.menu--item__has_submenu .menu--link:after {
-  content: '';
-  position: absolute;
-  top: $menu-item-height / 2;
-  right: 16px;
-  margin-top: -2.5px;
-  border-top: 5px solid;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-}
+  &__has_submenu {
 
-.submenu__opened {
-  background: $menu-item-hover-background;
+    &__opened {
+      background: $menu-link-hover-background;
 
-  .menu--link {
-    color: #000;
-  }
+      .menu--link {
+        color: $menu-link-hover-color;
+      }
 
-  .submenu {
-    display: block;
+      .submenu {
+        display: block;
+      }
+    }
+
+    .menu--link:after { // Caret icon
+      content: '';
+      position: absolute;
+      top: $menu-item-height / 2;
+      right: 16px;
+      margin-top: -2.5px;
+      border-top: 5px solid;
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+    }
   }
 }
 
@@ -86,9 +89,13 @@
 
   &:hover,
   &:focus {
-    color: $menu-item-hover-color;
-    background: $menu-item-hover-background;
+    color: $menu-link-hover-color;
+    background: $menu-link-hover-background;
     outline: none;
+  }
+
+  &.close_menu {
+    background: $menu-link-hover-background;
   }
 
 }
@@ -99,7 +106,7 @@
   justify-content: center;
   flex-shrink: 0;
   width: $menu-icon-width;
-  height: $menu-item-height;
+  height: $menu-icon-height;
 
   svg {
     width: 32px;
@@ -110,37 +117,31 @@
 
 .menu--text {
   display: block;
-  line-height: $menu-item-height;
+  line-height: $menu-text-line-height;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 
-// Menu sub level
+// Submenu
+//
 .submenu {
   display: none;
   overflow: hidden;
-  padding-left: 0;
   list-style: none;
 }
-.submenu--link {
-  display: block;
-  padding-left: $nav-minify-width;
-  padding-right: $menu-subitem-link-padding;
-  font-size: $menu-link-font-size;
-  color: $menu-link-color;
-  text-decoration: none;
 
-  &:hover {
-    color: #000;
-    background: $menu-subitem-hover-background;
+.submenu--link {
+  @extend .menu--link;
+  padding-left: $submenu-link-padding-left;
+
+  &:hover,
+  &__active {
+    background: $submenu-link-hover-background;
   }
 
+  &__active {
+    font-weight: $submenu-link-active-font-bold;
+  }
 }
-.submenu--link__active {
-  color: #000;
-  font-weight: 500;
-}
-// End - Menu sub level
-

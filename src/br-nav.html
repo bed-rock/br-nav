@@ -3,26 +3,23 @@
 <dom-module id="br-nav">
 
 <link rel="import" type="css" href="../dist/css/br-nav.css">
-<script src="br-nav.js"></script>
+<!-- <script src="br-nav.js"></script> -->
 
 <template>
 
   <nav class="page-nav">
 
-    <ul id="js-menu" class="menu">
+    <button class="menu--link close_menu" on-click="_toggleMenu">
+      <div class="menu--icon">
+        <svg>
+          <use xlink:href="../../br-icons/svgdefs.svg#icon-close"></use>
+        </svg>
+      </div>
+    </button>
 
-      <li class="menu--item">
-        <button class="menu--link" title="Voltar" onclick="_toggleMenu()">
-          <div class="menu--icon">
-            <svg>
-              <use xlink:href="../../br-icons/svgdefs.svg#icon-user"></use>
-            </svg>
-          </div>
-          <span class="menu--text">Voltar</span>
-        </button>
-      </li>
+    <ul class="menu js-menu">
 
-      <li class="menu--item  menu--item__has_submenu">
+      <!-- <li class="menu--item  menu--item__has_submenu">
         <a class="menu--link" title="Item 1">
           <div class="menu--icon">
             <svg>
@@ -67,7 +64,6 @@
       </li>
 
       <li class="menu--item  menu--item__has_submenu">
-
         <a class="menu--link" title="Item 4">
           <div class="menu--icon">
             <svg>
@@ -76,7 +72,6 @@
           </div>
           <span class="menu--text">Item 4</span>
         </a>
-
         <ul class="submenu">
           <li class="submenu--item">
             <a href="#" class="submenu--link">Submenu</a>
@@ -99,7 +94,20 @@
           </div>
           <span class="menu--text">Item 5</span>
         </a>
-      </li>
+      </li> -->
+
+      <template is="dom-repeat" items="{{items}}">
+        <li class="menu--item">
+          <a href="{{item.link}}" class="menu--link" title="{{item.label}}">
+            <div class="menu--icon" data-icon="{{item.icon}}">
+              <svg>
+                <use xlink:href="../../br-icons/svgdefs.svg#icon-user"></use>
+              </svg>
+            </div>
+            <span class="menu--text">{{item.label}}</span>
+          </a>
+        </li>
+      </template>
 
     </ul>
 
@@ -109,7 +117,48 @@
 
 <script>
   Polymer({
-    is: 'br-nav'
+    is: 'br-nav',
+
+    properties: {
+      items: {
+        type: Array,
+        value: []
+      }
+    },
+
+    created: function () {
+      var nav = Polymer.dom(this);
+      var menu = Polymer.dom(this).querySelector('.js-menu');
+      var item = Polymer.dom(this).querySelectorAll('.menu--item__has_submenu');
+    },
+
+    ready: function () {
+      _toggleSubmenu;
+    },
+
+    _toggleMenu: function () {
+      Polymer.dom(this).classList.toggle('page-nav__opened');
+    },
+
+    _toggleSubmenu: function () {
+      for (var i = 0; i < item.length; i++) {
+
+        if (item[i].classList.contains('menu--item__has_submenu')) {
+          item[i].addEventListener('click', function (e) {
+            e.preventDefault();
+
+            for (var j = 0; j < item.length; j++) {
+              if (this != item[j])
+                item[j].classList.remove('menu--item__has_submenu__opened');
+            }
+
+            this.classList.toggle('menu--item__has_submenu__opened');
+
+          }, false);
+        }
+      }
+    }
+
   });
 </script>
 
