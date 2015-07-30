@@ -1,4 +1,5 @@
 @import '../../bedrock/scss/variables';
+@import '../../br-header/src/variables';
 @import 'variables';
 
 :host {
@@ -44,8 +45,7 @@
 
 .menu--item {
   position: relative;
-  min-height: $menu-item-height;
-  line-height: $menu-item-height;
+  height: $menu-item-height;
 
   &__has_submenu {
 
@@ -79,6 +79,8 @@
   padding: 0;
   border: 0;
   width: 100%;
+  height: $menu-item-height;
+  line-height: $menu-item-height;
   font-size: $menu-link-font-size;
   font-weight: 400;
   color: $menu-link-color;
@@ -95,6 +97,7 @@
   }
 
   &.close_menu {
+    height: $header-height;
     background: $menu-link-hover-background;
   }
 
@@ -108,9 +111,9 @@
   width: $menu-icon-width;
   height: $menu-icon-height;
 
-  svg {
-    width: 32px;
-    height: 32px;
+  * {
+    // width: 32px;
+    // height: 32px;
     fill: currentColor;
   }
 }
