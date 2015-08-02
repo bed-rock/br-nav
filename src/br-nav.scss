@@ -45,7 +45,7 @@
 
 .menu--item {
   position: relative;
-  height: $menu-item-height;
+  min-height: $menu-item-height;
 
   &__has_submenu {
 
