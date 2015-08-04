@@ -15,27 +15,39 @@
 
     <ul id="menu" class="menu js-menu">
 
-        <li class="menu--group"><span>Financeiro</span><hr></li>
+      <li class="menu--group"><span>Financeiro</span><hr></li>
 
-        <template is="dom-repeat" items="{{items}}">
+      <template is="dom-repeat" items="{{items}}">
 
-          <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">
+        <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">
+
+          <template is="dom-if" if="{{item.group}}">
+            <div class="menu--icon" data-icon="{{item.icon}}">
+              <br-icons icon="{{item.icon}}"></br-icons>
+            </div>
+            <span class="menu--text">{{item.label}}</span><hr>
+          </template>
+
+
+          <template is="dom-if" if="{{item.icon}}">
             <a href="{{item.link}}" class="menu--link" title="{{item.label}}">
               <div class="menu--icon" data-icon="{{item.icon}}">
-                <br-icons icon="br-icons:user"></br-icons>
+                <br-icons icon="{{item.icon}}"></br-icons>
               </div>
               <span class="menu--text">{{item.label}}</span>
             </a>
-            <ul class="submenu">
-              <template is="dom-repeat" items="{{item.submenu}}">
-                <li class="submenu--item">
-                  <a href="{{item.link}}" class="submenu--link">{{item.label}}</a>
-                </li>
-              </template>
-            </ul>
-          </li>
+          </template>
 
-        </template>
+          <ul class="submenu">
+            <template is="dom-repeat" items="{{item.submenu}}">
+              <li class="submenu--item">
+                <a href="{{item.link}}" class="submenu--link">{{item.label}}</a>
+              </li>
+            </template>
+          </ul>
+        </li>
+
+      </template>
     </ul>
   </nav>
 </template>
@@ -51,33 +63,35 @@
       }
     },
 
-  ready: function () {
+    ready: function () {
 
     //  this.async(function(){
     //   Polymer.dom(this.$.menu).querySelectorAll('.menu--item__has_submenu');
     // },1);
 
-   },
+},
 
-    _toggleMenu: function () {
-      Polymer.dom(this).classList.toggle('page-nav__opened');
-    },
+_toggleMenu: function () {
+  Polymer.dom(this).classList.toggle('page-nav__opened');
+},
 
-    _toggleSubmenu: function(e){
-      var menuItem = e.target.offsetParent;
-      menuItem.classList.toggle('menu--item__has_submenu__opened');
-    },
+_toggleSubmenu: function(e){
+  var menuItem = e.target.offsetParent;
+  menuItem.classList.toggle('menu--item__has_submenu__opened');
+},
 
-    _getCssClasses: function(item) {
+_getCssClasses: function(item) {
 
-      if(item.submenu)
-        return 'menu--item menu--item__has_submenu';
-      else
-        return 'menu--item';
+  if(item.submenu)
+    return 'menu--item menu--item__has_submenu';
+  else if(item.group)
+   return 'menu--group';
+ else
+  return 'menu--item';
 
-    },
+},
 
-  });
+});
 </script>
 
 </dom-module>
