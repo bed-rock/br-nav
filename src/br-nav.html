@@ -13,18 +13,20 @@
         <br-icons class="nav-btn-icon" icon="br-icons:close"></br-icons>
       </div>
     </button>
-    
+
     <ul id="menu" class="menu js-menu">
-        
+
+        <li class="menu--group"><span>Financeiro</span></li>
+
         <template is="dom-repeat" items="{{items}}">
 
-          <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">          
+          <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">
             <a href="{{item.link}}" class="menu--link" title="{{item.label}}">
               <div class="menu--icon" data-icon="{{item.icon}}">
                 <br-icons icon="br-icons:user"></br-icons>
               </div>
               <span class="menu--text">{{item.label}}</span>
-            </a>            
+            </a>
             <ul class="submenu">
               <template is="dom-repeat" items="{{item.submenu}}">
                 <li class="submenu--item">
@@ -50,13 +52,13 @@
       }
     },
 
-  ready: function () { 
-     
+  ready: function () {
+
     //  this.async(function(){
     //   Polymer.dom(this.$.menu).querySelectorAll('.menu--item__has_submenu');
-    // },1);                
+    // },1);
 
-   }, 
+   },
 
     _toggleMenu: function () {
       Polymer.dom(this).classList.toggle('page-nav__opened');
@@ -74,7 +76,7 @@
       else
         return 'menu--item';
 
-    },  
+    },
 
   });
 </script>
