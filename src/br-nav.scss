@@ -44,23 +44,23 @@
 }
 
 .menu--group {
+  min-height: $menu-item-height;
   display: flex;
   align-items: center;
-  min-height: $menu-item-height;
-
-  &:after {
-    content: '';
-    flex-grow: 1;
-    height: 1px;
-    background-color: $color-white-20;
-  }
 
   span {
-    padding: 0 16px;
+    margin: 0 16px;
+    line-height: $menu-item-height;
     text-transform: uppercase;
     font-size: .85rem;
     letter-spacing: .5px;
     color: $menu-link-color;
+  }
+
+  hr {
+    flex-grow: 1;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #fff;
   }
 }
 
@@ -84,10 +84,7 @@
 
     .menu--link:after { // Caret icon
       content: '';
-      position: absolute;
-      top: $menu-item-height / 2;
-      right: 16px;
-      margin-top: -2.5px;
+      margin: 0 1rem;
       border-top: 5px solid;
       border-right: 5px solid transparent;
       border-left: 5px solid transparent;
@@ -98,6 +95,7 @@
 .menu--link {
   display: flex;
   flex-shrink: 0;
+  align-items: center;
   padding: 0;
   border: 0;
   width: 100%;
@@ -141,7 +139,7 @@
 }
 
 .menu--text {
-  display: block;
+  flex-grow: 1;
   line-height: $menu-text-line-height;
   white-space: nowrap;
   overflow: hidden;
