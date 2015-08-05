@@ -58,35 +58,26 @@
       }
     },
 
-    ready: function () {
+    _toggleMenu: function () {
+      Polymer.dom(this).classList.toggle('page-nav__opened');
+    },
 
-    //  this.async(function(){
-    //   Polymer.dom(this.$.menu).querySelectorAll('.menu--item__has_submenu');
-    // },1);
+    _toggleSubmenu: function(e){
+      var menuItem = e.target.offsetParent;
+      menuItem.classList.toggle('menu--item__has_submenu__opened');
+    },
 
-},
+    _getCssClasses: function(item) {
 
-_toggleMenu: function () {
-  Polymer.dom(this).classList.toggle('page-nav__opened');
-},
+      if(item.submenu)
+        return 'menu--item menu--item__has_submenu';
+      else if(item.group)
+        return 'menu--group';
+      else
+        return 'menu--item';
+    }
 
-_toggleSubmenu: function(e){
-  var menuItem = e.target.offsetParent;
-  menuItem.classList.toggle('menu--item__has_submenu__opened');
-},
-
-_getCssClasses: function(item) {
-
-  if(item.submenu)
-    return 'menu--item menu--item__has_submenu';
-  else if(item.group)
-   return 'menu--group';
- else
-  return 'menu--item';
-
-},
-
-});
+  });
 </script>
 
 </dom-module>
