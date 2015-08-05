@@ -15,17 +15,12 @@
 
     <ul id="menu" class="menu js-menu">
 
-      <li class="menu--group"><span>Financeiro</span><hr></li>
-
       <template is="dom-repeat" items="{{items}}">
 
         <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">
 
           <template is="dom-if" if="{{item.group}}">
-            <div class="menu--icon" data-icon="{{item.icon}}">
-              <br-icons icon="{{item.icon}}"></br-icons>
-            </div>
-            <span class="menu--text">{{item.label}}</span><hr>
+            <span>{{item.label}}</span><hr>
           </template>
 
 
