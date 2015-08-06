@@ -13,7 +13,7 @@
   transition: $nav-transition;
 
   &.page-nav__opened {
-    z-index: 1;
+    z-index: 1000;
     opacity: 1;
     background: rgba(#000, 0.5);
 
