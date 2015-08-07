@@ -2,9 +2,24 @@
 @import '../../br-header/src/variables';
 @import 'variables';
 
-:host {
+
+.open-nav {
+  display: block;
+  :host.page-nav__opened & {
+    display: none;
+  }
+}
+
+.close-nav {
+  display: none;
+  :host.page-nav__opened & {
+    display: block;
+  }
+}
+
+.overlay {
   position: fixed;
-  top: 0;
+  top: $header-height;
   left: 0;
   width: 100%;
   height: 100%;
@@ -12,26 +27,30 @@
   opacity: 0;
   transition: $nav-transition;
 
-  &.page-nav__opened {
+  :host.page-nav__opened & {
     z-index: 1000;
     opacity: 1;
     background: rgba(#000, 0.5);
-
-    .page-nav {
-      width: $nav-width;
-    }
   }
 }
 
 .page-nav {
+  position: fixed;
+  top: $header-height;
+  left: - $nav-width;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 0;
+  width: $nav-width;
   overflow: hidden;
   background: $nav-bg-color;
   user-select: none;
   transition: $nav-transition;
+
+  :host.page-nav__opened & {
+    left: 0;
+  }
 }
 
 .menu {
@@ -88,15 +107,17 @@
 
     .menu--link:after { // Caret icon
       content: '';
-      margin: 0 1rem;
-      border-top: 5px solid;
-      border-right: 5px solid transparent;
-      border-left: 5px solid transparent;
+      margin: 3px 1rem 0;
+      border-top: 6px solid;
+      border-right: 6px solid transparent;
+      border-left: 6px solid transparent;
+      transform: rotate(-45deg);
     }
   }
 }
 
-.menu--link {
+.menu--link,
+%menu--link {
   display: flex;
   flex-shrink: 0;
   align-items: center;
@@ -160,15 +181,15 @@
 }
 
 .submenu--link {
-  @extend .menu--link;
+  @extend %menu--link;
   padding-left: $submenu-link-padding-left;
 
   &:hover,
-  &__active {
+  &.active {
     background: $submenu-link-hover-background;
   }
 
-  &__active {
+  &.active {
     font-weight: $submenu-link-active-font-bold;
   }
 }

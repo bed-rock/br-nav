@@ -6,12 +6,19 @@
 <link rel="import" type="css" href="../dist/css/br-nav.css">
 
 <template>
+
+  <br-icons class="open-nav" icon="br-icons:menu"></br-icons>
+  <br-icons class="close-nav" icon="br-icons:close"></br-icons>
+
+  <div class="overlay"></div>
+
   <nav class="page-nav">
-    <button class="menu--link close_menu" on-click="_toggleMenu">
+
+    <!-- <button class="menu--link close_menu" on-click="_toggleMenu">
       <div class="menu--icon">
         <br-icons class="nav-btn-icon" icon="br-icons:close"></br-icons>
       </div>
-    </button>
+    </button> -->
 
     <ul id="menu" class="menu js-menu">
 
@@ -44,7 +51,9 @@
 
       </template>
     </ul>
+
   </nav>
+
 </template>
 
 <script>
@@ -58,7 +67,28 @@
       }
     },
 
-    _toggleMenu: function () {
+    listeners: {
+      'click': '_toggleMenu'
+    },
+
+    ready: function() {
+
+      var _this = Polymer.dom(this);
+
+      document.addEventListener('click', function() {
+        if (_this.classList.contains('page-nav__opened') && _this.classList !== null)
+          _this.classList.remove('page-nav__opened');
+      }, false);
+
+      var content = Polymer.dom(this.root).querySelector('.page-nav');
+      content.addEventListener('click', function(event) {
+        event.stopPropagation();
+      }, false);
+
+    },
+
+    _toggleMenu: function (event) {
+      event.stopPropagation();
       Polymer.dom(this).classList.toggle('page-nav__opened');
     },
 
@@ -68,7 +98,6 @@
     },
 
     _getCssClasses: function(item) {
-
       if(item.submenu)
         return 'menu--item menu--item__has_submenu';
       else if(item.group)
