@@ -18,21 +18,27 @@
 
       <template is="dom-repeat" items="{{items}}">
 
-        <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">
+       <template is="dom-if" if="{{item.group}}">
+        <li class$="{{ _getCssClasses(item) }}">
+          <span>{{item.label}}</span><hr>
+          <ul class="submenu">
+            <template is="dom-repeat" items="{{item.submenu}}">
+              <li class="submenu--item">
+                <a href="{{item.link}}" class="submenu--link">{{item.label}}</a>
+              </li>
+            </template>
+          </ul>
+        </li>
+      </template>
 
-          <template is="dom-if" if="{{item.group}}">
-            <span>{{item.label}}</span><hr>
-          </template>
-
-
-          <template is="dom-if" if="{{item.icon}}">
-            <a href="{{item.link}}" class="menu--link" title="{{item.label}}">
-              <div class="menu--icon" data-icon="{{item.icon}}">
-                <br-icons icon="{{item.icon}}"></br-icons>
-              </div>
-              <span class="menu--text">{{item.label}}</span>
-            </a>
-          </template>
+      <template is="dom-if" if="{{item.icon}}">
+        <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">        
+          <a href="{{item.link}}" class="menu--link" title="{{item.label}}">
+            <div class="menu--icon" data-icon="{{item.icon}}">
+              <br-icons icon="{{item.icon}}"></br-icons>
+            </div>
+            <span class="menu--text">{{item.label}}</span>
+          </a>
 
           <ul class="submenu">
             <template is="dom-repeat" items="{{item.submenu}}">
@@ -42,6 +48,7 @@
             </template>
           </ul>
         </li>
+      </template>
 
       </template>
     </ul>
