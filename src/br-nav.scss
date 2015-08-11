@@ -105,8 +105,9 @@
       }
     }
 
-    .menu--link:after { // Caret icon
+    .menu--link::after { // Caret icon
       content: '';
+      display: inline-flex; // IE10 Fix
       margin: 3px 1rem 0;
       border-top: 6px solid;
       border-right: 6px solid transparent;
@@ -164,6 +165,7 @@
 }
 
 .menu--text {
+  display: inline-flex; // IE10 Fix
   flex-grow: 1;
   line-height: $menu-text-line-height;
   white-space: nowrap;
