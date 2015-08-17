@@ -8,7 +8,7 @@
 <template>
 
   <br-icons class="open-nav" icon="br-icons:menu"></br-icons>
-  <br-icons class="close-nav" icon="br-icons:close"></br-icons>
+  <br-icons class="close-nav" icon="br-icons:arrow-back"></br-icons>
 
   <div class="overlay"></div>
 
@@ -32,7 +32,7 @@
       </template>
 
       <template is="dom-if" if="{{item.icon}}">
-        <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">        
+        <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">
           <a href="{{item.link}}" class="menu--link" title="{{item.label}}">
             <div class="menu--icon" data-icon="{{item.icon}}">
               <br-icons icon="{{item.icon}}"></br-icons>
