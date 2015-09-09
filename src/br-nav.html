@@ -19,11 +19,11 @@
 
        <template is="dom-if" if="{{item.group}}">
         <li class$="{{ _getCssClasses(item) }}">
-          <span>{{item.label}}</span><hr>
+          <span>{{item.title}}</span><hr>
           <ul class="submenu">
             <template is="dom-repeat" items="{{item.submenu}}">
               <li class="submenu--item">
-                <a href="{{item.link}}" class="submenu--link">{{item.label}}</a>
+                <a target="_self" href="{{item.href}}" class="submenu--link">{{item.title}}</a>
               </li>
             </template>
           </ul>
@@ -32,17 +32,17 @@
 
       <template is="dom-if" if="{{item.icon}}">
         <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">
-          <a href="{{item.link}}" class="menu--link" title="{{item.label}}">
+          <a target="_self" href="{{item.href}}" class="menu--link" title="{{item.title}}">
             <div class="menu--icon" data-icon="{{item.icon}}">
               <br-icons icon="{{item.icon}}"></br-icons>
             </div>
-            <span class="menu--text">{{item.label}}</span>
+            <span class="menu--text">{{item.title}}</span>
           </a>
 
           <ul class="submenu">
             <template is="dom-repeat" items="{{item.submenu}}">
               <li class="submenu--item">
-                <a href="{{item.link}}" class="submenu--link">{{item.label}}</a>
+                <a target="_self" href="{{item.href}}" class="submenu--link">{{item.title}}</a>
               </li>
             </template>
           </ul>
