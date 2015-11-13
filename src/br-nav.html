@@ -21,7 +21,7 @@
         <li class$="{{ _getCssClasses(item) }}">
           <span>{{item.title}}</span><hr>
           <ul class="submenu">
-            <template is="dom-repeat" items="{{item.submenu}}">
+            <template is="dom-repeat" items="{{item.subMenu}}">
               <li class="submenu--item">
                 <a target="_self" href="{{item.href}}" class="submenu--link">{{item.title}}</a>
               </li>
@@ -40,7 +40,7 @@
           </a>
 
           <ul class="submenu">
-            <template is="dom-repeat" items="{{item.submenu}}">
+            <template is="dom-repeat" items="{{item.subMenu}}">
               <li class="submenu--item">
                 <a target="_self" href="{{item.href}}" class="submenu--link">{{item.title}}</a>
               </li>
