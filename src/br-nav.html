@@ -2,7 +2,7 @@
 
 <dom-module id="br-nav">
 
-<link rel="import" type="css" href="../dist/css/br-nav.css">
+<link rel="import" type="css" href="../dist/css/br-nav.min.css">
 
 <template>
 
@@ -97,13 +97,18 @@
       menuItem.classList.toggle('menu--item__has_submenu__opened');
     },
 
-    _getCssClasses: function(item) {
-      if(item.submenu)
+    _getCssClasses: function ( item ) {
+
+      if ( item.subMenu && item.subMenu.length > 0 ) {
         return 'menu--item menu--item__has_submenu';
-      else if(item.group)
+      }
+      else if ( item.group ) {
         return 'menu--group';
-      else
+      }
+      else {
         return 'menu--item';
+      }
+
     }
 
   });

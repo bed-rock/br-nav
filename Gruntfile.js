@@ -80,14 +80,12 @@ module.exports = function (grunt) {
 
   });
 
-grunt.loadNpmTasks('grunt-contrib-uglify');
-grunt.loadNpmTasks('grunt-contrib-cssmin');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-contrib-sass');
 grunt.loadNpmTasks('grunt-postcss');
+grunt.loadNpmTasks('grunt-contrib-cssmin');
+grunt.loadNpmTasks('grunt-contrib-uglify');
 
-grunt.registerTask( 'default', [ 'sass', 'postcss' ] );
-grunt.registerTask( 'css', [ 'sass', 'postcss', 'cssmin' ] );
-grunt.registerTask( 'js', [ 'uglify'] );
+grunt.registerTask( 'default', [ 'sass', 'postcss', 'cssmin' ] );
 
 };
