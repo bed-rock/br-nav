@@ -1,6 +1,6 @@
 {
   "name": "br-nav",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "authors": [
     "cbfranca <cleidsonbf@gmail.com>",
     "marcelo-ribeiro <marceloribeiromidia@gmail.com>"
@@ -23,6 +23,6 @@
     "tests"
   ],
    "dependencies": {
-    "bedrock-base": "~1.0.0"
+    "bedrock-base": "latest"
   }
 }
