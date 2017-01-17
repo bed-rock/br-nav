@@ -2,61 +2,62 @@
 
 <dom-module id="br-nav">
 
-<link rel="import" type="css" href="../dist/css/br-nav.css">
+  <link rel="import" type="css" href="../dist/css/br-nav.css">
 
-<template>
+  <template>
 
-  <br-icons class="open-nav" icon="br-icons:menu"></br-icons>
-  <br-icons class="close-nav" icon="br-icons:arrow-back"></br-icons>
+    <br-icons class="open-nav" icon="br-icons:menu"></br-icons>
+    <br-icons class="close-nav" icon="br-icons:arrow-back"></br-icons>
 
-  <div class="overlay"></div>
+    <div class="overlay"></div>
 
-  <nav class="page-nav">
+    <nav class="page-nav">
 
-    <ul id="menu" class="menu js-menu">
+      <ul id="menu" class="menu js-menu">
 
-      <template is="dom-repeat" items="{{items}}">
+        <template is="dom-repeat" items="{{items}}">
 
-       <template is="dom-if" if="{{item.group}}">
-        <li class$="{{ _getCssClasses(item) }}">
-          <span>{{item.title}}</span><hr>
-          <ul class="submenu">
-            <template is="dom-repeat" items="{{item.subMenu}}">
-              <li class="submenu--item">
-                <a target="_self" href="{{item.href}}" class="submenu--link">{{item.title}}</a>
-              </li>
-            </template>
-          </ul>
-        </li>
-      </template>
+          <template is="dom-if" if="{{item.group}}">
+            <li class$="{{ _getCssClasses(item) }}">
+              <span>{{item.title}}</span>
+              <hr>
+              <ul class="submenu">
+                <template is="dom-repeat" items="{{item.subMenu}}">
+                  <li class="submenu--item">
+                    <a target="_self" href="{{item.href}}" class="submenu--link">{{item.title}}</a>
+                  </li>
+                </template>
+              </ul>
+            </li>
+          </template>
 
-      <template is="dom-if" if="{{item.icon}}">
-        <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">
-          <a target="_self" href="{{item.href}}" class="menu--link" title="{{item.title}}">
-            <div class="menu--icon" data-icon="{{item.icon}}">
-              <br-icons icon="{{item.icon}}"></br-icons>
-            </div>
-            <span class="menu--text">{{item.title}}</span>
-          </a>
+          <template is="dom-if" if="{{item.icon}}">
+            <li class$="{{ _getCssClasses(item) }}" on-click="_toggleSubmenu">
+              <a target="_self" href="{{item.href}}" class="menu--link" title="{{item.title}}">
+                <div class="menu--icon" data-icon="{{item.icon}}">
+                  <br-icons icon="{{item.icon}}"></br-icons>
+                </div>
+                <span class="menu--text">{{item.title}}</span>
+              </a>
 
-          <ul class="submenu">
-            <template is="dom-repeat" items="{{item.subMenu}}">
-              <li class="submenu--item">
-                <a target="_self" href="{{item.href}}" class="submenu--link">{{item.title}}</a>
-              </li>
-            </template>
-          </ul>
-        </li>
-      </template>
+              <ul class="submenu">
+                <template is="dom-repeat" items="{{item.subMenu}}">
+                  <li class="submenu--item">
+                    <a target="_self" href="{{item.href}}" class="submenu--link">{{item.title}}</a>
+                  </li>
+                </template>
+              </ul>
+            </li>
+          </template>
 
-      </template>
-    </ul>
+        </template>
+      </ul>
 
-  </nav>
+    </nav>
 
-</template>
+  </template>
 
-<script>
+  <script>
   Polymer({
     is: 'br-nav',
 
@@ -71,17 +72,17 @@
       'click': '_toggleMenu'
     },
 
-    ready: function() {
+    ready: function () {
 
       var _this = Polymer.dom(this);
 
-      document.addEventListener('click', function() {
+      document.addEventListener('click', function () {
         if (_this.classList.contains('page-nav__opened') && _this.classList !== null)
           _this.classList.remove('page-nav__opened');
       }, false);
 
       var content = Polymer.dom(this.root).querySelector('.page-nav');
-      content.addEventListener('click', function(event) {
+      content.addEventListener('click', function (event) {
         event.stopPropagation();
       }, false);
 
@@ -92,15 +93,15 @@
       Polymer.dom(this).classList.toggle('page-nav__opened');
     },
 
-    _toggleSubmenu: function(e){
+    _toggleSubmenu: function (e) {
       var menuItem = e.target.offsetParent;
       menuItem.classList.toggle('menu--item__has_submenu__opened');
     },
 
-    _getCssClasses: function(item) {
-      if(item.submenu)
+    _getCssClasses: function (item) {
+      if (item.subMenu && item.subMenu.length > 0)
         return 'menu--item menu--item__has_submenu';
-      else if(item.group)
+      else if (item.group)
         return 'menu--group';
       else
         return 'menu--item';
